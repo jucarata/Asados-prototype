@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MenuItem from "../components/MenuItem.astro";
+import CartBar from "../components/CartBar.astro";
+import CartSheet from "../components/CartSheet.astro";
+import Icon from "../components/Icon.astro";
+import { categories, items } from "../data/menu";
+
+const catalog = items.map(({ id, name, price }) => ({ id, name, price }));
+---
+
+
+<BaseLayout
+  title="Menú — ASADOS 24/7"
+  description="Explora el menú digital de ASADOS 24/7 y arma tu pedido."
+  page="menu"
+>
+  <div data-page-root>
+    <header class="menu-top">
+      <div class="menu-top__row">
+        <a class="menu-top__brand" href="/">ASADOS<span>24/7</span></a>
+        <a class="menu-top__link" href="/">
+          <Icon name="home" size={16} />
+          Inicio
+        </a>
+      </div>
+      <nav class="chips" aria-label="Categorías del menú">
+        {
+          categories.map((category, index) => (
+            <button
+              type="button"
+              class:list={["chip", { "is-active": index === 0 }]}
+              data-chip={category.id}
+              aria-current={index === 0 ? "true" : undefined}
+            >
+              {category.name}
+            </button>
+          ))
+        }
+      </nav>
+    </header>
+
+    <main class="menu-page">
+      {
+        categories.map((category) => {
+          const sectionItems = items.filter((item) => item.categoryId === category.id);
+          return (
+            <section
+              class="menu-section"
+              id={`cat-${category.id}`}
+              data-section={category.id}
+              aria-labelledby={`title-${category.id}`}
+            >
+              <h2 class="menu-section__title" id={`title-${category.id}`}>
+                {category.name}
+              </h2>
+              {category.note ? <p class="menu-section__note">{category.note}</p> : null}
+              <ul class="menu-list">
+                {sectionItems.map((item) => (
+                  <MenuItem item={item} />
+                ))}
+              </ul>
+            </section>
+          );
+        })
+      }
+    </main>
+
+    <CartBar />
+    <CartSheet />
+
+    <script id="menu-catalog" type="application/json" set:html={JSON.stringify(catalog)} />
+    <script>
+      import "../scripts/cart.js";
+    </script>
+  </div>
+</BaseLayout>

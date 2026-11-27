@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { heroSlides } from "../data/hero";
+---
+
+<BaseLayout title="ASADOS 24/7 — Menú digital">
+  <main class="home" data-home-hero>
+    <div class="home-hero" aria-roledescription="carrusel">
+      <div class="home-hero__slides">
+        {
+          heroSlides.map((slide, index) => (
+            <figure
+              class:list={["home-hero__slide", { "is-active": index === 0 }]}
+              data-hero-slide={slide.id}
+              aria-hidden={index === 0 ? "false" : "true"}
+            >
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                width="1200"
+                height="800"
+                style={slide.position ? `object-position: ${slide.position}` : undefined}
+                decoding={index === 0 ? "sync" : "async"}
+                fetchpriority={index === 0 ? "high" : "low"}
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            </figure>
+          ))
+        }
+      </div>
+
+      <div class="home-hero__shade" aria-hidden="true"></div>
+
+      <div class="home-hero__panel">
+        <div class="home__brand-row">
+          <h1 class="home__brand">ASADOS <span>24/7</span></h1>
+          <img
+            class="home__pet"
+            src="/asados-pet.png"
+            alt=""
+            width="160"
+            height="160"
+            decoding="async"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="home__rule" aria-hidden="true"></div>
+        <p class="home__tagline">
+          <Icon name="flame" size={16} class="home__tag-icon" />
+          Parrilla que no duerme. Escanea y pide.
+        </p>
+        <a class="btn btn--ember btn--block home__cta" href="/menu">
+          <Icon name="utensils" size={20} />
+          Ver menú
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    import "../scripts/home-hero.js";
+  </script>
+</BaseLayout>

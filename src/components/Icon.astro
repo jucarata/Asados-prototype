@@ -1,0 +1,75 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import {
+  ArrowLeft,
+  Flame,
+  Home,
+  MessageCircle,
+  Minus,
+  Plus,
+  ShoppingBag,
+  UtensilsCrossed,
+  X,
+  type IconNode,
+} from "lucide";
+
+type IconName =
+  | "arrow-left"
+  | "flame"
+  | "home"
+  | "message-circle"
+  | "minus"
+  | "plus"
+  | "shopping-bag"
+  | "utensils"
+  | "x";
+
+interface Props extends HTMLAttributes<"svg"> {
+  name: IconName;
+  size?: number;
+  strokeWidth?: number;
+}
+
+const icons: Record<IconName, IconNode> = {
+  "arrow-left": ArrowLeft,
+  flame: Flame,
+  home: Home,
+  "message-circle": MessageCircle,
+  minus: Minus,
+  plus: Plus,
+  "shopping-bag": ShoppingBag,
+  utensils: UtensilsCrossed,
+  x: X,
+};
+
+const { name, size = 20, strokeWidth = 2, class: className, ...rest } = Astro.props;
+const node = icons[name];
+
+function attrsToString(attrs: Record<string, string | number> = {}) {
+  return Object.entries(attrs)
+    .map(([key, value]) => `${key}="${String(value).replaceAll('"', "&quot;")}"`)
+    .join(" ");
+}
+
+function renderChildren(children: IconNode): string {
+  return children
+    .map(([tag, attrs]) => `<${tag} ${attrsToString(attrs as Record<string, string | number>)} />`)
+    .join("");
+}
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={strokeWidth}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class:list={["icon", className]}
+  aria-hidden="true"
+  {...rest}
+  set:html={renderChildren(node)}
+/>

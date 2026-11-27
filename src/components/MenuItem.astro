@@ -1,0 +1,51 @@
+---
+import {
+  formatPrice,
+  getItemImage,
+  hasRealItemImage,
+  type MenuItem as MenuItemType,
+} from "../data/menu";
+import Icon from "./Icon.astro";
+
+interface Props {
+  item: MenuItemType;
+}
+
+const { item } = Astro.props;
+const imageSrc = getItemImage(item);
+const imageAlt = hasRealItemImage(item) ? item.name : "";
+---
+
+<li
+  class="menu-item"
+  data-item-id={item.id}
+  style={`--dish-accent: ${item.accent}`}
+>
+  <div class="menu-item__body">
+    <h3 class="menu-item__name">{item.name}</h3>
+    <p class="menu-item__desc">{item.description}</p>
+    <p class="menu-item__price">{formatPrice(item.price)}</p>
+  </div>
+  <div class="menu-item__media">
+    <div class="menu-item__thumb">
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        width="176"
+        height="176"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="menu-item__controls" data-item-controls={item.id}>
+      <button
+        type="button"
+        class="btn--icon menu-item__add"
+        data-add-item={item.id}
+        aria-label={`Agregar ${item.name} al carrito`}
+      >
+        <Icon name="plus" size={22} strokeWidth={2.5} />
+      </button>
+    </div>
+  </div>
+</li>

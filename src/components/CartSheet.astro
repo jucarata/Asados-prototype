@@ -1,0 +1,37 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<div class="sheet-backdrop" id="cart-backdrop" hidden></div>
+
+<aside
+  class="cart-sheet"
+  id="cart-sheet"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="cart-sheet-title"
+  hidden
+>
+  <div class="cart-sheet__handle" aria-hidden="true"></div>
+  <div class="cart-sheet__head">
+    <h2 class="cart-sheet__title" id="cart-sheet-title">Tu pedido</h2>
+    <button type="button" class="cart-sheet__close" id="cart-close" aria-label="Cerrar carrito">
+      <Icon name="x" size={22} />
+    </button>
+  </div>
+  <div class="cart-sheet__body">
+    <div class="cart-empty" data-cart-empty>
+      Aún no hay nada en el carrito. Agrega algo del menú.
+    </div>
+    <ul class="cart-lines" data-cart-lines hidden></ul>
+  </div>
+  <div class="cart-sheet__foot" data-cart-foot hidden>
+    <div class="cart-sheet__total">
+      <span>Total</span>
+      <strong data-cart-sheet-total>$0</strong>
+    </div>
+    <a class="btn btn--ember btn--block" href="/orden" id="generate-order">
+      Continuar pedido
+    </a>
+  </div>
+</aside>

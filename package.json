@@ -1,0 +1,18 @@
+{
+  "name": "asados-247",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.18.2",
+    "lucide": "^1.81.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1"
+  }
+}

@@ -1,0 +1,199 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<BaseLayout
+  title="Tu orden — ASADOS 24/7"
+  description="Revisa tu pedido, completa tus datos y envíalo por WhatsApp."
+  page="orden"
+>
+  <main class="order-page">
+    <a class="order-page__back" href="/menu">
+      <Icon name="arrow-left" size={18} />
+      Volver al menú
+    </a>
+
+    <div data-order-empty hidden aria-hidden="true" class="order-empty">
+      <img
+        class="order-empty__mascot"
+        src="/asados-pet.png"
+        alt=""
+        width="220"
+        height="220"
+        decoding="async"
+      />
+      <h1 class="order-page__title">Sin pedidos aún</h1>
+      <p class="order-page__lead">Agrega platos al carrito para generar la orden.</p>
+      <a class="btn btn--ember" href="/menu">
+        <Icon name="utensils" size={18} />
+        Ir al menú
+      </a>
+    </div>
+
+    <div data-order-filled hidden aria-hidden="true" class="order-flow">
+      <nav class="order-steps" aria-label="Pasos del pedido">
+        <ol class="order-steps__list">
+          <li class="order-steps__item is-current" data-step-indicator="1">
+            <span class="order-steps__num" aria-hidden="true">1</span>
+            <span class="order-steps__label">Pedido</span>
+          </li>
+          <li class="order-steps__item" data-step-indicator="2">
+            <span class="order-steps__num" aria-hidden="true">2</span>
+            <span class="order-steps__label">Datos</span>
+          </li>
+          <li class="order-steps__item" data-step-indicator="3">
+            <span class="order-steps__num" aria-hidden="true">3</span>
+            <span class="order-steps__label">Confirmar</span>
+          </li>
+        </ol>
+      </nav>
+
+      <section
+        class="order-panel"
+        data-order-step="1"
+        aria-labelledby="order-step-1-title"
+      >
+        <h1 class="order-page__title" id="order-step-1-title">Tu pedido</h1>
+        <p class="order-page__lead">Revisa cantidades antes de continuar.</p>
+
+        <ul class="order-summary order-summary--editable" data-order-summary></ul>
+
+        <a class="order-add-more" href="/menu">
+          <Icon name="plus" size={16} />
+          Agregar más platos
+        </a>
+      </section>
+
+      <section
+        class="order-panel"
+        data-order-step="2"
+        hidden
+        aria-labelledby="order-step-2-title"
+      >
+        <h1 class="order-page__title" id="order-step-2-title">Tus datos</h1>
+        <p class="order-page__lead">Así sabemos cómo entregarte el pedido.</p>
+
+        <form class="order-form" id="order-form" novalidate>
+          <label class="order-field">
+            <span class="order-field__label">Nombre</span>
+            <input
+              class="order-field__input"
+              type="text"
+              name="name"
+              id="order-name"
+              autocomplete="name"
+              required
+              placeholder="Tu nombre"
+            />
+          </label>
+
+          <fieldset class="order-field">
+            <legend class="order-field__label">Medio de pago</legend>
+            <div class="order-choice" role="radiogroup" aria-label="Medio de pago">
+              <label class="order-choice__option">
+                <input type="radio" name="payment" value="transferencia" required checked />
+                <span>Transferencia</span>
+              </label>
+              <label class="order-choice__option">
+                <input type="radio" name="payment" value="efectivo" />
+                <span>Efectivo</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="order-field">
+            <legend class="order-field__label">Tipo de entrega</legend>
+            <div class="order-choice" role="radiogroup" aria-label="Tipo de entrega">
+              <label class="order-choice__option">
+                <input type="radio" name="delivery" value="domicilio" required />
+                <span>Domicilio</span>
+              </label>
+              <label class="order-choice__option">
+                <input type="radio" name="delivery" value="mesa" checked />
+                <span>Mesa</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <label class="order-field" data-delivery-field="domicilio" hidden>
+            <span class="order-field__label">Dirección</span>
+            <input
+              class="order-field__input"
+              type="text"
+              name="address"
+              id="order-address"
+              autocomplete="street-address"
+              placeholder="Calle, barrio, referencias"
+            />
+          </label>
+
+          <label class="order-field" data-delivery-field="mesa">
+            <span class="order-field__label">Número de mesa</span>
+            <input
+              class="order-field__input"
+              type="text"
+              name="table"
+              id="order-table"
+              inputmode="numeric"
+              placeholder="Ej. 7"
+            />
+          </label>
+
+          <p class="order-form__error" data-order-error hidden role="alert"></p>
+        </form>
+      </section>
+
+      <section
+        class="order-panel"
+        data-order-step="3"
+        hidden
+        aria-labelledby="order-step-3-title"
+      >
+        <h1 class="order-page__title" id="order-step-3-title">Confirmar</h1>
+        <p class="order-page__lead">Revisa todo y envía el pedido por WhatsApp.</p>
+
+        <div class="order-confirm">
+          <div class="order-confirm__block">
+            <h2 class="order-confirm__heading">Pedido</h2>
+            <ul class="order-summary" data-confirm-summary></ul>
+          </div>
+
+          <div class="order-confirm__block">
+            <h2 class="order-confirm__heading">Datos</h2>
+            <dl class="order-confirm__facts" data-confirm-facts></dl>
+          </div>
+
+          <details class="order-whatsapp">
+            <summary>Vista previa del mensaje</summary>
+            <pre class="order-preview" data-order-preview></pre>
+          </details>
+        </div>
+      </section>
+
+      <div class="order-footer" data-order-footer>
+        <div class="order-total-row order-total-row--compact">
+          <span>Total</span>
+          <strong data-order-total>$0</strong>
+        </div>
+
+        <div class="order-footer__actions">
+          <button type="button" class="btn btn--ghost" data-order-back hidden>
+            Atrás
+          </button>
+          <button type="button" class="btn btn--ember" data-order-next>
+            Continuar
+          </button>
+          <button type="button" class="btn btn--ember" data-order-send hidden>
+            <Icon name="message-circle" size={18} />
+            Enviar por WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    import "../scripts/cart.js";
+  </script>
+</BaseLayout>

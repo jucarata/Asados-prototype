@@ -1,0 +1,26 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<button
+  type="button"
+  class="cart-bar"
+  id="cart-bar"
+  hidden
+  aria-controls="cart-sheet"
+  aria-label="Ver carrito"
+>
+  <span class="cart-bar__lead">
+    <span class="cart-bar__bag" aria-hidden="true">
+      <Icon name="shopping-bag" size={22} strokeWidth={2.25} class="cart-bar__bag-icon" />
+      <span class="cart-bar__count" data-cart-count>0</span>
+    </span>
+    <span class="cart-bar__copy">
+      <span class="cart-bar__title">Ver carrito</span>
+      <span class="cart-bar__meta" data-cart-meta>0 platos</span>
+    </span>
+  </span>
+  <span class="cart-bar__aside">
+    <span class="cart-bar__total" data-cart-total>$0</span>
+  </span>
+</button>
