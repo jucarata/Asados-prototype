@@ -8,5 +8,6 @@ const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://jucarata.github.io',
-  base: isGitHubActions ? '/Asados-prototype' : '/',
+  // Trailing slash matters: BASE_URL is joined onto asset paths.
+  base: isGitHubActions ? '/Asados-prototype/' : '/',
 });
