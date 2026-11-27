@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
 import { heroSlides } from "../data/hero";
+import { withBase } from "../lib/base";
 ---
 
 <BaseLayout title="ASADOS 24/7 — Menú digital">
@@ -37,7 +38,7 @@ import { heroSlides } from "../data/hero";
           <h1 class="home__brand">ASADOS <span>24/7</span></h1>
           <img
             class="home__pet"
-            src="/asados-pet.png"
+            src={withBase("/asados-pet.png")}
             alt=""
             width="160"
             height="160"
@@ -50,7 +51,7 @@ import { heroSlides } from "../data/hero";
           <Icon name="flame" size={16} class="home__tag-icon" />
           Parrilla que no duerme. Escanea y pide.
         </p>
-        <a class="btn btn--ember btn--block home__cta" href="/menu">
+        <a class="btn btn--ember btn--block home__cta" href={withBase("/menu")}>
           <Icon name="utensils" size={20} />
           Ver menú
         </a>

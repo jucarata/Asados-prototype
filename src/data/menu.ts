@@ -1,3 +1,5 @@
+import { withBase } from "../lib/base";
+
 export type MenuItem = {
   id: string;
   name: string;
@@ -658,14 +660,19 @@ export function getItemById(id: string): MenuItem | undefined {
 
 /** Foto del plato: override del ítem → mapa por id → categoría → placeholder. */
 export function getItemImage(item: MenuItem): string {
-  return (
+  const path =
     item.image ??
     ITEM_IMAGES[item.id] ??
     CATEGORY_IMAGES[item.categoryId] ??
-    PLACEHOLDER_IMAGE
-  );
+    PLACEHOLDER_IMAGE;
+  return withBase(path);
 }
 
 export function hasRealItemImage(item: MenuItem): boolean {
-  return getItemImage(item) !== PLACEHOLDER_IMAGE;
+  const path =
+    item.image ??
+    ITEM_IMAGES[item.id] ??
+    CATEGORY_IMAGES[item.categoryId] ??
+    PLACEHOLDER_IMAGE;
+  return path !== PLACEHOLDER_IMAGE;
 }

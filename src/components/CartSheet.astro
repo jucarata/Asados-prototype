@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import { withBase } from "../lib/base";
 ---
 
 <div class="sheet-backdrop" id="cart-backdrop" hidden></div>
@@ -30,7 +31,7 @@ import Icon from "./Icon.astro";
       <span>Total</span>
       <strong data-cart-sheet-total>$0</strong>
     </div>
-    <a class="btn btn--ember btn--block" href="/orden" id="generate-order">
+    <a class="btn btn--ember btn--block" href={withBase("/orden")} id="generate-order">
       Continuar pedido
     </a>
   </div>

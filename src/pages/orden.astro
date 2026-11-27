@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
+import { withBase } from "../lib/base";
 ---
 
 <BaseLayout
@@ -9,7 +10,7 @@ import Icon from "../components/Icon.astro";
   page="orden"
 >
   <main class="order-page">
-    <a class="order-page__back" href="/menu">
+    <a class="order-page__back" href={withBase("/menu")}>
       <Icon name="arrow-left" size={18} />
       Volver al menú
     </a>
@@ -17,7 +18,7 @@ import Icon from "../components/Icon.astro";
     <div data-order-empty hidden aria-hidden="true" class="order-empty">
       <img
         class="order-empty__mascot"
-        src="/asados-pet.png"
+        src={withBase("/asados-pet.png")}
         alt=""
         width="220"
         height="220"
@@ -25,7 +26,7 @@ import Icon from "../components/Icon.astro";
       />
       <h1 class="order-page__title">Sin pedidos aún</h1>
       <p class="order-page__lead">Agrega platos al carrito para generar la orden.</p>
-      <a class="btn btn--ember" href="/menu">
+      <a class="btn btn--ember" href={withBase("/menu")}>
         <Icon name="utensils" size={18} />
         Ir al menú
       </a>
@@ -59,7 +60,7 @@ import Icon from "../components/Icon.astro";
 
         <ul class="order-summary order-summary--editable" data-order-summary></ul>
 
-        <a class="order-add-more" href="/menu">
+        <a class="order-add-more" href={withBase("/menu")}>
           <Icon name="plus" size={16} />
           Agregar más platos
         </a>

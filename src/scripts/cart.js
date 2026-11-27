@@ -414,7 +414,7 @@ function initMenuPage() {
   renderSheet();
 }
 
-const WHATSAPP_NUMBER = "573126560873";
+const WHATSAPP_NUMBER = String(import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "").replace(/\D/g, "");
 const ORDER_DETAILS_KEY = "asados247-order-details";
 
 /** @typedef {{ name: string, payment: "transferencia" | "efectivo" | "", delivery: "domicilio" | "mesa" | "", address: string, table: string }} OrderDetails */
@@ -863,6 +863,10 @@ function initOrderPage() {
     }
     if (!validateDetails()) {
       goToStep(2);
+      return;
+    }
+    if (!WHATSAPP_NUMBER) {
+      showError("Falta configurar el número de WhatsApp.");
       return;
     }
     const message = buildOrderMessage(cart, details);

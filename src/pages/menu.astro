@@ -5,6 +5,7 @@ import CartBar from "../components/CartBar.astro";
 import CartSheet from "../components/CartSheet.astro";
 import Icon from "../components/Icon.astro";
 import { categories, items } from "../data/menu";
+import { withBase } from "../lib/base";
 
 const catalog = items.map(({ id, name, price }) => ({ id, name, price }));
 ---
@@ -18,8 +19,8 @@ const catalog = items.map(({ id, name, price }) => ({ id, name, price }));
   <div data-page-root>
     <header class="menu-top">
       <div class="menu-top__row">
-        <a class="menu-top__brand" href="/">ASADOS<span>24/7</span></a>
-        <a class="menu-top__link" href="/">
+        <a class="menu-top__brand" href={withBase("/")}>ASADOS<span>24/7</span></a>
+        <a class="menu-top__link" href={withBase("/")}>
           <Icon name="home" size={16} />
           Inicio
         </a>

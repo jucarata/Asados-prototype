@@ -1,3 +1,5 @@
+import { withBase } from "../lib/base";
+
 export type HeroSlide = {
   id: string;
   src: string;
@@ -10,31 +12,31 @@ export type HeroSlide = {
 export const heroSlides: HeroSlide[] = [
   {
     id: "churrasco",
-    src: "/images/hero/churrasco.jpg",
+    src: withBase("/images/hero/churrasco.jpg"),
     alt: "Churrasco a la parrilla, jugoso y con chimichurri",
     position: "center 35%",
   },
   {
     id: "pizza",
-    src: "/images/hero/pizza.jpg",
+    src: withBase("/images/hero/pizza.jpg"),
     alt: "Pizza con queso derretido recién salida del horno",
     position: "center 40%",
   },
   {
     id: "hamburguesa",
-    src: "/images/hero/hamburguesa.png",
+    src: withBase("/images/hero/hamburguesa.png"),
     alt: "Hamburguesa doble con tocineta, queso y papas fritas",
     position: "center 45%",
   },
   {
     id: "lasana",
-    src: "/images/hero/lasana.png",
+    src: withBase("/images/hero/lasana.png"),
     alt: "Porción de lasaña gratinada con salsa y queso",
     position: "center 40%",
   },
   {
     id: "bandeja-paisa",
-    src: "/images/hero/bandeja-paisa.jpg",
+    src: withBase("/images/hero/bandeja-paisa.jpg"),
     alt: "Bandeja paisa con frijoles, chicharrón, huevo y arepa",
     position: "center 35%",
   },
